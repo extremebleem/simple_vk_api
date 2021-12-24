@@ -1,4 +1,5 @@
 # **SIMPLE VK API**
+Простенькая библиотека для использования [VK API](https://dev.vk.com/method)
 ## Зависимости
 + nlohmann JSON
 + CURL
