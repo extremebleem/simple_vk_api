@@ -1,4 +1,4 @@
-#include <iosfwd>
+﻿#include <iosfwd>
 
 #include <nlohmann/json.hpp>
 
@@ -13,15 +13,16 @@ class MethodData
 {
 protected:
 	std::string methodName_;
-	std::unordered_map<std::string, std::string> data_;
+	std::map<std::string, std::string> data_;
 
 public:
 	void SetName(std::string name);
 	std::string GetName() const;
 
 	void AddArgument(std::string name, std::string value);
+	std::string& GetArgument(std::string name);
 
-	const std::unordered_map<std::string, std::string>& GetArguments() const;
+	const std::map<std::string, std::string>& GetArguments() const;
 	std::string GetArgumentsAsString() const;
 };
 
@@ -45,7 +46,8 @@ public:
 	void SetCaptchaCallback(captchaCallbackFn* cap_callback);
 
 private:
-	const char* MakeCurlRequest(const char* url, const char* data);
+	static std::string WideStringToString(const std::string& wstr);
+	static std::string StringToWideString(const std::string& wstr);
+	std::string MakeCurlRequest(std::string url, std::string data);
 	static int CurlWriter(char* data, size_t size, size_t nmemb, std::string* buffer);
-
 };
